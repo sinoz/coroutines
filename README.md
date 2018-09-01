@@ -37,7 +37,7 @@ This fork also provides some syntactic sugary that'll help you with explicit typ
   implicit def toSuspendable3[A, B, C, Y, R](c: Any): Suspendable3[A, B, C, Y, R] = c.asInstanceOf[Suspendable3[A, B, C, Y, R]]
 ```
 
-which helps IntelliJ IDEA with proper error reporting and helps you as well.
+which helps IntelliJ IDEA with proper error reporting.
 
 ```$xslt
   def main(args: Array[String]): Unit = {
