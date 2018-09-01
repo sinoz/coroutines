@@ -1,30 +1,27 @@
-lazy val globalScalaVersion = "2.12.4"
+ThisBuild / organization := "com.storm-enroute"
 
-name := "coroutines"
+ThisBuild / version := "1.0"
 
-organization := "com.storm-enroute"
+ThisBuild / scalaVersion := "2.12.4"
 
-version := "1.0"
-
-scalaVersion := globalScalaVersion
-
-lazy val dependencies = Seq(
-  "org.scala-lang" % "scala-reflect" % globalScalaVersion,
+lazy val sharedDependencies = Seq(
+  "org.scala-lang" % "scala-reflect" % "2.12.4",
   "org.scalatest" %% "scalatest" % "3.0.5" % "test"
 )
 
 lazy val common = project("coroutines-common")
   .settings(
-    libraryDependencies ++= dependencies
+    libraryDependencies ++= sharedDependencies
   )
 
-lazy val extra = project("coroutines-extra")
+lazy val patterns = project("coroutines-patterns")
   .dependsOn(root)
 
 lazy val root = Project("coroutines", base = file("."))
   .settings(
-    libraryDependencies ++= dependencies
+    libraryDependencies ++= sharedDependencies
   )
+  .aggregate(common)
   .dependsOn(common)
 
 def project(id: String) = Project(id, base = file(id))
